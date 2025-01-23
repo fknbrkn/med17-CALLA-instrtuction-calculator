@@ -25,22 +25,36 @@ def encode_calla(address):
 def swapLastBytes(hx):
     return (hx[0] << 0x18) + (hx[1] << 0x10) + (hx[3] << 8) + (hx[2])
     
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
     
 if __name__ == "__main__":
+    print('')
+    print("Enter the address (in hexadecimal without 0x8* base, e.g., 172A00): ")
+    print('**********************************************************************')
     while True:
         try:
             # user input
-            address = int(input("Enter the address (in hexadecimal without 0x8* base, e.g., 172A00): "), 16)
+            address = int(input(">: "), 16)
             hex_code = encode_calla(address)
             hex_code = " ".join(f"{(hex_code >> (8 * i)) & 0xFF:02X}" for i in reversed(range((hex_code.bit_length() + 7) // 8)))
 
             print('')
-            print(f"Instruction for CALLA to address 0x{address:X}: {hex_code}")
+            print(f"Instruction for CALLA to address 0x{address:X}: {bcolors.BOLD}{bcolors.OKGREEN}{hex_code}{bcolors.ENDC}")
             print('')
+            
             
         except ValueError as e:
             print(f"Error: {e}")
         
-        # Ожидание нажатия пробела для рестарта
         #input()
   
