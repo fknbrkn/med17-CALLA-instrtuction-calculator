@@ -34,10 +34,13 @@ if __name__ == "__main__":
             hex_code = encode_calla(address)
             hex_code = " ".join(f"{(hex_code >> (8 * i)) & 0xFF:02X}" for i in reversed(range((hex_code.bit_length() + 7) // 8)))
 
+            print('')
             print(f"Instruction for CALLA to address 0x{address:X}: {hex_code}")
+            print('')
+            
         except ValueError as e:
             print(f"Error: {e}")
         
         # Ожидание нажатия пробела для рестарта
-        input()
+        #input()
   
